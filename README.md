@@ -4,6 +4,13 @@
 
 ## Build & Run
 
+### Dependencies
+
+```
+$ sudo pip3 install -U django
+$ sudo pip3 install -U djangorestframework
+```
+
 ### Create PyCharm Project
 
 Create a new project in **PyCharm** with "File / New Project...", specify the path to `mysite` as the location, e.g., `/home/adam github/luke/mysite`.
