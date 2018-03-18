@@ -4,53 +4,6 @@
 
 仅为学习交流目的。
 
-## Build & Run
-
-### Dependencies
-
-```bash
-$ sudo pip install -U django djangorestframework pillow
-```
-`pillow` is required by Django `ImageField`.
-
-### Create PyCharm Project
-
-Create a new project in **PyCharm** with "File / New Project...", specify the path to `mysite` as the location, e.g., `/home/adam/github/luke/mysite`.
-
-PyCharm will ask:
-> The directory '...' is not empty. Would you like to create a project from existing sources instead?
-
-Click Yes. Follow the instructions, then your projcet should be opened in PyCharm.
-
-### Migrate DB
-
-`Sqlite3` is used during the development. Run `migrate.sh` to migrate the DB:
-```
-$ ./migrate.h
-```
-
-`migrate.sh` is no magic but the following commands:
-```bash
-rm -r luke/migrations
-python3 manage.py makemigrations luke
-python3 manage.py migrate
-```
-
-This will recreate DB tables (If your DB is sqlite3, there will be a file named "db.sqlite3" under current folder).
-You need to do this almost whenever you change the fields of your models.
-
-### Run
-
-```bash
-$ ./run.sh
-```
-Which is actually:
-```
-$ python3 manage.py runserver
-```
-
-Now you should be able to access `http://127.0.0.1:8000/` in your Browser.
-
 ## APP 构想
 
 基于地点、话题、情绪的松散的社交应用。
@@ -105,4 +58,51 @@ Now you should be able to access `http://127.0.0.1:8000/` in your Browser.
 ### 私信
 
 类似于电邮，为臭味相投的用户提供保持联系的一种方式。
+
+## Build & Run
+
+### Dependencies
+
+```bash
+$ sudo pip install -U django djangorestframework pillow
+```
+`pillow` is required by Django `ImageField`.
+
+### Create PyCharm Project
+
+Create a new project in **PyCharm** with "File / New Project...", specify the path to `mysite` as the location, e.g., `/home/adam/github/luke/mysite`.
+
+PyCharm will ask:
+> The directory '...' is not empty. Would you like to create a project from existing sources instead?
+
+Click Yes. Follow the instructions, then your projcet should be opened in PyCharm.
+
+### Migrate DB
+
+`Sqlite3` is used during the development. Run `migrate.sh` to migrate the DB:
+```
+$ ./migrate.h
+```
+
+`migrate.sh` is no magic but the following commands:
+```bash
+rm -r luke/migrations
+python3 manage.py makemigrations luke
+python3 manage.py migrate
+```
+
+This will recreate DB tables (If your DB is sqlite3, there will be a file named "db.sqlite3" under current folder).
+You need to do this almost whenever you change the fields of your models.
+
+### Run
+
+```bash
+$ ./run.sh
+```
+Which is actually:
+```
+$ python3 manage.py runserver
+```
+
+Now you should be able to access `http://127.0.0.1:8000/` in your Browser.
 
