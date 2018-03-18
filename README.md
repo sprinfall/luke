@@ -2,18 +2,20 @@
 
 此为后端程序，通过 Python + Django + Django Rest Framework 提供了 RESTful APIs。
 
+仅为学习交流目的。
+
 ## Build & Run
 
 ### Dependencies
 
+```bash
+$ sudo pip install -U django djangorestframework pillow
 ```
-$ sudo pip3 install -U django
-$ sudo pip3 install -U djangorestframework
-```
+`pillow` is required by Django `ImageField`.
 
 ### Create PyCharm Project
 
-Create a new project in **PyCharm** with "File / New Project...", specify the path to `mysite` as the location, e.g., `/home/adam github/luke/mysite`.
+Create a new project in **PyCharm** with "File / New Project...", specify the path to `mysite` as the location, e.g., `/home/adam/github/luke/mysite`.
 
 PyCharm will ask:
 > The directory '...' is not empty. Would you like to create a project from existing sources instead?
@@ -22,7 +24,7 @@ Click Yes. Follow the instructions, then your projcet should be opened in PyChar
 
 ### Migrate DB
 
-Sqlite3 is used during the development. Run `migrate.sh` to migrate the DB:
+`Sqlite3` is used during the development. Run `migrate.sh` to migrate the DB:
 ```
 $ ./migrate.h
 ```
@@ -34,12 +36,12 @@ python3 manage.py makemigrations luke
 python3 manage.py migrate
 ```
 
-This will recreate DB tables.
+This will recreate DB tables (If your DB is sqlite3, there will be a file named "db.sqlite3" under current folder).
 You need to do this almost whenever you change the fields of your models.
 
 ### Run
 
-```
+```bash
 $ ./run.sh
 ```
 Which is actually:
@@ -103,3 +105,4 @@ Now you should be able to access `http://127.0.0.1:8000/` in your Browser.
 ### 私信
 
 类似于电邮，为臭味相投的用户提供保持联系的一种方式。
+

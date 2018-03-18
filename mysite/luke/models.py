@@ -26,7 +26,7 @@ class Profile(models.Model):
     # No need for additional lookups.
     # See: https://stackoverflow.com/a/37348787
     # NOTE: Use user_id as the primary key.
-    user = models.OneToOneField(User, primary_key=True, related_name='profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='profile')
 
     # Profile picture.
     avatar = models.ImageField(upload_to='avatar', max_length=255, null=True, blank=True)
