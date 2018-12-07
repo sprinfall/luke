@@ -64,7 +64,7 @@
 ### Dependencies
 
 ```bash
-$ sudo pip install -U django djangorestframework pillow
+$ pip install --user -U django djangorestframework pillow
 ```
 `pillow` is required by Django `ImageField`.
 
@@ -86,9 +86,9 @@ $ ./migrate.h
 
 `migrate.sh` is no magic but the following commands:
 ```bash
-rm -r luke/migrations
-python3 manage.py makemigrations luke
-python3 manage.py migrate
+$ rm -r luke/migrations
+$ python3 manage.py makemigrations luke
+$ python3 manage.py migrate
 ```
 
 This will recreate DB tables (If your DB is sqlite3, there will be a file named "db.sqlite3" under current folder).
