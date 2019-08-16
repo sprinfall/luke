@@ -1,16 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
+#from django.db.models.signals import post_save
 
 
-################################################################################
+#-------------------------------------------------------------------------------
 
-
+# TODO: ordering
 class Profile(models.Model):
     """
     Profile of user.
     Profile will be created automatically on user creation.
-    TODO: ordering
     """
 
     GENDERS = (
@@ -19,23 +18,26 @@ class Profile(models.Model):
         ('U', 'Unknown'),
     )
 
-    # Using related_name yo u can access a user's profile easily, for example
-    # for request.user
+    # NOTE: Use user_id as the primary key.
+    # NOTE: Using related_name you can access a user's profile easily, e.g.,
+    #   for request.user
     #     request.user.profile.location
     #     request.user.profile.gender
-    # No need for additional lookups.
+    #   No need for additional lookups.
     # See: https://stackoverflow.com/a/37348787
-    # NOTE: Use user_id as the primary key.
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE,
+                                primary_key=True, related_name='profile')
 
     # Profile picture.
-    avatar = models.ImageField(upload_to='avatar', max_length=255, null=True, blank=True)
+    avatar = models.ImageField(upload_to='avatar', max_length=255, null=True,
+                               blank=True)
 
+    # Call get_gender_display() to access the display value.
     gender = models.CharField(max_length=1, choices=GENDERS, default='U')
 
     birth_date = models.DateField(null=True)
 
-    # Self introducation (normally one sentence).
+    # Self introduction (normally one sentence).
     intro = models.CharField(max_length=100, default='', blank=True)
 
     city = models.CharField(max_length=30, default='', blank=True)
@@ -44,9 +46,9 @@ class Profile(models.Model):
     # Cell phone number.
     # phone = models.CharField(max_length=
 
-    # wechat = models.CharField(max_length=30, default='', blank=True)
+    wechat = models.CharField(max_length=30, default='', blank=True)
 
-    # level = models
+    # level = ...
 
     def __str__(self):
         return 'Profile: {}'.format(self.user.username)
@@ -81,8 +83,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 #                   dispatch_uid="users-profilecreation-signal")
 
 
-################################################################################
-
+#-------------------------------------------------------------------------------
 
 class Tag(models.Model):
     """
@@ -95,8 +96,7 @@ class Tag(models.Model):
         return 'Tag: {}'.format(self.name)
 
 
-################################################################################
-
+#-------------------------------------------------------------------------------
 
 class Post(models.Model):
 
@@ -114,7 +114,8 @@ class Post(models.Model):
     # The user who created this message.
     # The first parameter could also be string "auth.User".
     # TODO: Use get_user_model() instead of User.
-    user = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='posts',
+                             on_delete=models.CASCADE)
 
     content = models.CharField(max_length=256)
 
@@ -142,8 +143,7 @@ class Post(models.Model):
         return 'Post: {}'.format(self.content)
 
 
-################################################################################
-
+#-------------------------------------------------------------------------------
 
 class Photo(models.Model):
 
@@ -157,8 +157,7 @@ class Photo(models.Model):
     order = models.SmallIntegerField(default=0)
 
 
-################################################################################
-
+#-------------------------------------------------------------------------------
 
 class Visit(models.Model):
     """
