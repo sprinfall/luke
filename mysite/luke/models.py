@@ -1,9 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
-#from django.db.models.signals import post_save
 
 
-#-------------------------------------------------------------------------------
+# from django.db.models.signals import post_save
+
+
+# -------------------------------------------------------------------------------
 
 # TODO: ordering
 class Profile(models.Model):
@@ -77,13 +79,14 @@ def create_user_profile(sender, instance, created, **kwargs):
         profile = Profile(user=instance)
         profile.save()
 
+
 # NOTE: Comment to nest profile into user.
 # post_save.connect(create_user_profile,
 #                   sender=User,
 #                   dispatch_uid="users-profilecreation-signal")
 
 
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 
 class Tag(models.Model):
     """
@@ -96,10 +99,9 @@ class Tag(models.Model):
         return 'Tag: {}'.format(self.name)
 
 
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 
 class Post(models.Model):
-
     class Meta:
         ordering = ('create_time',)
 
@@ -114,8 +116,7 @@ class Post(models.Model):
     # The user who created this message.
     # The first parameter could also be string "auth.User".
     # TODO: Use get_user_model() instead of User.
-    user = models.ForeignKey(User, related_name='posts',
-                             on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
 
     content = models.CharField(max_length=256)
 
@@ -143,10 +144,9 @@ class Post(models.Model):
         return 'Post: {}'.format(self.content)
 
 
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 
 class Photo(models.Model):
-
     # A post has multiple photos.
     post = models.ForeignKey(Post, related_name='photos', on_delete=models.CASCADE)
 
@@ -157,7 +157,7 @@ class Photo(models.Model):
     order = models.SmallIntegerField(default=0)
 
 
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 
 class Visit(models.Model):
     """

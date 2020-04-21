@@ -64,9 +64,15 @@
 ### Dependencies
 
 ```bash
-$ pip install --user -U django djangorestframework pillow
+$ pip install django djangorestframework pillow
 ```
 `pillow` is required by Django `ImageField`.
+
+
+To support OpenAPI and Swagger UI:
+```bash
+$ pip install pyyaml uritemplate
+```
 
 ### Create PyCharm Project
 
